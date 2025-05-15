@@ -104,6 +104,48 @@
     </div>
   </div>
 </section>
+<!-- Chatbot Container -->
+<div id="chatbot-toggle">💬</div>
 
+<div id="chatbot">
+  <div id="chatbot-header">
+    <span>AI Assistant</span>
+    <button id="chatbot-close">&times;</button>
+  </div>
+  <div id="chatbot-messages"></div>
+  <input type="text" id="chatbot-input" placeholder="Type your message..." />
+</div>
+<script>
+  const chatbotToggle = document.getElementById('chatbot-toggle');
+  const chatbot = document.getElementById('chatbot');
+  const chatbotClose = document.getElementById('chatbot-close');
+  const chatbotInput = document.getElementById('chatbot-input');
+  const chatbotMessages = document.getElementById('chatbot-messages');
+
+  // Toggle open/close
+  chatbotToggle.onclick = () => {
+    chatbot.style.display = 'flex';
+    chatbotToggle.style.display = 'none';
+  };
+  chatbotClose.onclick = () => {
+    chatbot.style.display = 'none';
+    chatbotToggle.style.display = 'flex';
+  };
+
+  // Send message
+  chatbotInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && chatbotInput.value.trim() !== '') {
+      const msg = chatbotInput.value.trim();
+      chatbotMessages.innerHTML += `<div><strong>You:</strong> ${msg}</div>`;
+      chatbotInput.value = '';
+
+      // Dummy bot reply
+      setTimeout(() => {
+        chatbotMessages.innerHTML += `<div><strong>Bot:</strong> I'm just a demo right now 😄</div>`;
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }, 500);
+    }
+  });
+</script>
 </body>
 </html>
